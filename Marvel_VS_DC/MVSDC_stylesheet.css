@@ -3,6 +3,8 @@
 
 body{
 background-image:url(images/mdcbackground.png);
+background-size: 100%;
+background-repeat: no-repeat;
 background-color:#FF6666;
 }
 img{
