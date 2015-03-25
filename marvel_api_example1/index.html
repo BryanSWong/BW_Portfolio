@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Marvel POC</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+<script src="main.js"></script>
+<link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+
+
+
+<header>Marvel API</header>
+
+<div id="wrap">
+
+<div id="pic">
+<img id="image"src="" alt="Captain America portriat">
+</div>
+
+<div id="name">
+
+</div>
+
+
+<div id="id">
+
+</div>
+
+
+<div id="desc">
+
+</div>
+
+</div>
+
+<footer id="footer"> 
+
+</footer>
+
+
+
+<script>
+
+var public_key = "0da95040a439aded19c7038ed9698074";
+var private_key = "cf2439902d6e71a59e53978ca96d05ce8f40af82";
+
+//Get the current timestamp.
+function getCurrentTimeStamp() {
+	return Date.now();
+}
+
+function getHashToken(public_key, private_key, timeStamp) {
+	
+	var hash = CryptoJS.MD5(timeStamp+private_key+public_key).toString();
+	//var hashToken = hash.toString(CryptoJS.enc.Hex);
+
+	return hash;
+}
+
+// credit to Mirza Shiraz Baig for function call.
+function getCharData2() {
+	
+	var timeStamp = getCurrentTimeStamp();
+
+	var hash = getHashToken(public_key, private_key, timeStamp);
+
+	return JSON.parse($.ajax({
+		type: 'GET',
+		url: "http://gateway.marvel.com:80/v1/public/characters?ts="+timeStamp+"&name=Captain%20America&apikey="+public_key+"&hash="+hash,
+		dataType: 'json',
+		global: false,
+		async: false,
+		success: function(data) {
+			return data;
+		}
+	}).responseText);
+}
+
+var oJson = getCharData2();
+var oResult = oJson.data.results[0];
+
+//console.log(oResult);
+
+//document.write(oJson.attributionHTML);
+
+//document.write(oResult.description);
+
+var image = oResult.thumbnail.path;
+var imageSize = "/portrait_incredible.";
+var extension = oResult.thumbnail.extension;
+var url = oResult.thumbnail.path+imageSize+extension;
+
+document.getElementById("image").setAttribute("src",url);
+
+document.getElementById("name").innerHTML = "Name: " + oResult.name;
+
+document.getElementById("id").innerHTML = "ID#: " + oResult.id;
+
+document.getElementById("desc").innerHTML = oResult.description;
+
+document.getElementsByTagName("footer")[0].innerHTML = oJson.attributionHTML; 
+
+</script>
+
+</body>
+</html>

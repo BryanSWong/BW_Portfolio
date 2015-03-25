@@ -1,0 +1,76 @@
+
+html, body {
+	height: 100%;
+	background-color: white;
+}
+
+div{
+
+}
+
+header{
+	text-align:center;
+	font-size: 40px;
+	font-weight: bold;
+	height: 50px;
+
+
+}
+
+footer{
+	color: black;
+	text-align: center;
+}
+
+img{
+	padding-left: 46px;
+	padding-top: 4px;
+
+}
+
+#pic{
+	height:auto;
+	width: 324px;
+	margin: 0 auto;
+	padding: 20px;
+
+}
+
+#name{
+	height:auto;
+	width: 260px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+#id{
+	height:auto;
+	width: 260px;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+#desc{
+	height:auto;
+	width: 260px;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+
+#wrap {min-height: 100%;}
+
+#footer {
+	position: relative;
+	margin-top: -30px; /* negative value of footer height */
+	height: 30px;
+	clear:both;} 
+
+/*Opera Fix*/
+body:before {
+	content:"";
+	height:100%;
+	float:left;
+	width:0;
+	margin-top:-32767px;/
+}
